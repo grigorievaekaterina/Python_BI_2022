@@ -119,7 +119,18 @@ def orf(seq):
                             count += 1
                     if count == 1:
                         orfs[pos].append(''.join(orf_list))
-    return orfs
+    orf_list = "Found open reading frames: "
+    zero = len(orf_list)
+    for var in orfs:
+        if len(var) != 0:
+            for i in var:
+                if i != '':
+                    orf_list += i + ' '
+    if len(orf_list) > zero:
+        return orf_list
+    else:
+        return "Open reading frames were not found"
+
 
 '''
 protein in development
@@ -256,4 +267,4 @@ while True:
         continue
     for cmd in range(len(list(available_cmds_dict.keys()))):
         if list(available_cmds_dict.keys())[cmd] == command:
-            print(available_cmds_dict.values()[cmd](sequence))
+            print(list(available_cmds_dict.values())[cmd](sequence))
