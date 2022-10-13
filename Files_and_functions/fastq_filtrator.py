@@ -1,40 +1,40 @@
 def main(input_fastq, output_file_prefix, gc_bounds=(0, 100), length_bounds=(0, 2 ** 32), quality_threshold=0,
          save_filtered=False):
     with open(input_fastq) as input_file:
-        with open(output_file_prefix + "_passed.fastq") as filtered_output:
-            bad_output_list = []
-            count = 0
-            four_lines = []
-            check = []
-            read = 'read'
-            while len(read) != 0:
-                read = input_file.readline()
-                count += 1
-                if count % 4 == 1:
-                    four_lines.append(read)
-                elif count % 4 == 2:
-                    four_lines.append(read)
-                    check.append(gc(read[:-1], gc_bounds))
-                    check.append(length(read[:-1], length_bounds))
-                elif count % 4 == 3:
-                    four_lines.append(read)
-                elif count % 4 == 0:
-                    four_lines.append(read)
-                    check.append(quality(read[:-1], quality_threshold))
-                    if check[0] is True and check[1] is True and check[2] is True:
-                        filtered_output.write(''.join(four_lines))
-                    else:
-                        bad_output_list.append(four_lines[0])
-                        bad_output_list.append(four_lines[1])
-                        bad_output_list.append(four_lines[2])
-                        bad_output_list.append(four_lines[3])
-                    count = 0
-                    four_lines = []
-                    check = []
-            if save_filtered is True:
-                with open(output_file_prefix + "_failed.fastq") as bad_output_file:
-                    bad_output_file.write(''.join(bad_output_list))
-                    bad_output_file.close()
+        filtered_output = open(output_file_prefix + "_passed.fastq", 'w')
+        bad_output_list = []
+        count = 0
+        four_lines = []
+        check = []
+        read = 'read'
+        while len(read) != 0:
+            read = input_file.readline()
+            count += 1
+            if count % 4 == 1:
+                four_lines.append(read)
+            elif count % 4 == 2:
+                four_lines.append(read)
+                check.append(gc(read[:-1], gc_bounds))
+                check.append(length(read[:-1], length_bounds))
+            elif count % 4 == 3:
+                four_lines.append(read)
+            elif count % 4 == 0:
+                four_lines.append(read)
+                check.append(quality(read[:-1], quality_threshold))
+                if check[0] is True and check[1] is True and check[2] is True:
+                    filtered_output.write(''.join(four_lines))
+                else:
+                    bad_output_list.append(four_lines[0])
+                    bad_output_list.append(four_lines[1])
+                    bad_output_list.append(four_lines[2])
+                    bad_output_list.append(four_lines[3])
+                count = 0
+                four_lines = []
+                check = []
+        if save_filtered is True:
+            with open(output_file_prefix + "_failed.fastq") as bad_output_file:
+                bad_output_file.write(''.join(bad_output_list))
+                bad_output_file.close()
 
 
 def gc(line, gc_bounds):
@@ -83,8 +83,7 @@ def length(line, length_bounds):
 def quality(line, quality_threshold):
     score = 0
     for nucl in line:
-        score += ord(nucl)
-    print(len(line))
+        score += ord(nucl)-33
     mean = score / len(line)
     if mean >= quality_threshold:
         return True
