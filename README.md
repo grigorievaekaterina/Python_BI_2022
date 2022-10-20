@@ -60,21 +60,21 @@ python3 -m pip install -r requirements.txt
 * Rename google package:
 
 ```bash
-cd lib/python3.11/
+cd lib/python3.11/site-packages/
 mv google-3.0.0.dist-info google
 ```
 
 * Change the code in pandas module to avoid error with indexes using vim text editor:
 
 ```bash
-vim PATH_TO_ENVIRONMENT/ENVIRONMENT_NAME/lib/python3.11/site-packages/pandas/core/frame.py
+vim pandas/core/frame.py
 ```
 
-In vim editor find the next: `/index cannot be a set`
+In vim editor press `/` and find the next: `index cannot be a set`
 
 Using insert mode (press `i`) delete the following `raise ValueError("index cannot be a set")`
 
-Write the following `index = list(index)`.
+Write the following `index = list(index)` at the same place accoding to tabulation.
 
 Press `ESC` to quit insert mode. Close the file typing `:wq`.
 
