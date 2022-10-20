@@ -1,0 +1,10 @@
+google
+python-math
+bs4
+typing
+requests
+opencv-python
+Bio
+aiohttp
+pandas
+lxml
