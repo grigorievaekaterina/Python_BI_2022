@@ -1,0 +1,14 @@
+json
+requests
+re
+logging
+time
+sys
+io
+os
+sys
+seaborn
+pandas
+datetime
+dotenv
+bs4
