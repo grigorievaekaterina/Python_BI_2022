@@ -32,7 +32,7 @@ def main(input_fastq, output_file_prefix, gc_bounds=(0, 100), length_bounds=(0, 
                 four_lines = []
                 check = []
         if save_filtered is True:
-            with open(output_file_prefix + "_failed.fastq") as bad_output_file:
+            with open(output_file_prefix + "_failed.fastq", "w") as bad_output_file:
                 bad_output_file.write(''.join(bad_output_list))
                 bad_output_file.close()
 
