@@ -21,7 +21,7 @@ def main(input_fastq, output_file_prefix, gc_bounds=(0, 100), length_bounds=(0, 
             elif count % 4 == 0:
                 four_lines.append(read)
                 check.append(quality(read[:-1], quality_threshold))
-                if check[0] is True and check[1] is True and check[2] is True:
+                if check[0] and check[1] and check[2]:
                     filtered_output.write(''.join(four_lines))
                 else:
                     bad_output_list.append(four_lines[0])
