@@ -64,20 +64,12 @@ def gc_content(line):
 
 
 def length(line, length_bounds):
-    if length_bounds != (0, 2 ** 32):
         length_read = len(line)
         if type(length_bounds) is int:
-            if length_read <= length_bounds:
-                return True
-            else:
-                return False
+            return length_read <= length_bounds
         else:
-            if length_bounds[0] <= length_read <= length_bounds[1]:
-                return True
-            else:
-                return False
-    else:
-        return True
+            return length_bounds[0] <= length_read <= length_bounds[1]
+  
 
 
 def quality(line, quality_threshold):
