@@ -14,8 +14,8 @@ def main(input_fastq, output_file_prefix, gc_bounds=(0, 100), length_bounds=(0, 
                 four_lines.append(read)
             elif count % 4 == 2:
                 four_lines.append(read)
-                check.append(gc(read[:-1], gc_bounds))
-                check.append(length(read[:-1], length_bounds))
+                check.append(gc(read.strip(), gc_bounds))
+                check.append(length(read.strip(), length_bounds))
             elif count % 4 == 3:
                 four_lines.append(read)
             elif count % 4 == 0:
