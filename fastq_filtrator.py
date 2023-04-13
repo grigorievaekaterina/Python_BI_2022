@@ -58,8 +58,7 @@ def gc(line, gc_bounds):
 def gc_content(line):
     gc_in_seq = 0
     for nucl in line:
-        if nucl == "G" or nucl == "C":
-            gc_in_seq += 1
+        gc_in_seq += (nucl == "G" or nucl == "C")
     return (gc_in_seq / len(line)) * 100
 
 
